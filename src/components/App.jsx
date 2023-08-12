@@ -23,7 +23,7 @@ const App = () => {
   }, [contacts]);
 
   const newContacts = newObj => {
-    if (contacts.some(x => x.name === newObj.name)) {
+    if (contacts.some(x => x.name.toLowerCase === newObj.name.toLowerCase)) {
       alert(`${newObj.name} is already is contacts`);
       return false;
     }
