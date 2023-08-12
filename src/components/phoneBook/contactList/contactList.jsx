@@ -2,21 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NameContacts, List, Elements, Button } from './contactList.styled';
 
-const ContactList = ({ contacts, fillter, deleteContacts }) => {
+const ContactList = ({ contacts, deleteContacts }) => {
 return (
     <List>
-        {fillter
-        ? fillter.map(({ id, name, number }) => (
-            <Elements key={id}>
-                <NameContacts>
-                {name}: {number}
-                </NameContacts>
-                <Button type="button" name={id} onClick={deleteContacts}>
-                Delete
-                </Button>
-            </Elements>
-        ))
-        : contacts.map(({ id, name, number }) => (
+        {contacts.map(({ id, name, number }) => (
             <Elements key={id}>
                 <NameContacts>
                     {name}: {number}
@@ -38,7 +27,6 @@ PropTypes.shape({
     number: PropTypes.string.isRequired,
 })
 ),
-fillter: PropTypes.bool.isRequired,
 deleteContacts: PropTypes.func.isRequired,
 };
 
