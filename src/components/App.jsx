@@ -52,7 +52,7 @@ const App = () => {
         <Container>
           <Div>
             <H1>Phonebook</H1>
-            <ContactForm newContacts={newContacts} />
+            <ContactForm newContact={newContacts} />
           </Div>
 
           <DivList>

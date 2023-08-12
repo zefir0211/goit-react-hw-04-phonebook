@@ -1,43 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import { Span, Input, Button, Form } from './contactForm.styled';
 
-export default class ContactForm extends Component {
-    state = {
+const BASE_STATE = {
     name: '',
     number: '',
 };
 
-onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+const ContactForm = ({ newContact }) => {
+const [{ name, number }, setState] = useState(BASE_STATE);
+
+const onChange = event => {
+    const { name, value } = event.target;
+    setState(prevState => ({ ...prevState, [name]: value }))
 };
 
-onSubmit = event => {
+const onSubmit = event => {
     event.preventDefault();
     const newContacts = {
         id: nanoid(5),
-        name: this.state.name,
-        number: this.state.number,
+        name,
+        number,
     };
-    const isUnique = this.props.newContacts(newContacts);
+    const isUnique = newContact(newContacts);
 
     if (isUnique) {
-        this.setState({
-            name: '',
-            number: '',
-    });
+        setState({ ...BASE_STATE });
     }
 };
 
-render() {
-    const { name, number } = this.state;
     return (
-    <Form onSubmit={this.onSubmit}>
+    <Form onSubmit={onSubmit}>
         <label htmlFor="name">
         <Span>Name</Span>
         <Input
-            onChange={this.onChange}
+            onChange={onChange}
             type="text"
             name="name"
             value={name}
@@ -47,11 +45,10 @@ render() {
             placeholder="Rosie Simpson"
         />
         </label>
-
         <label htmlFor="number">
             <Span>Number</Span>
             <Input
-            onChange={this.onChange}
+            onChange={onChange}
             type="tel"
             name="number"
             value={number}
@@ -61,13 +58,12 @@ render() {
             placeholder="645-17-79"
         />
         </label>
-
         <Button type="submit">Add contact</Button>
     </Form>
     );
-    }
-}
+};
 
 ContactForm.propTypes = {
-    newContacts: PropTypes.func.isRequired,
+    newContact: PropTypes.func.isRequired,
 };
+export default ContactForm;
