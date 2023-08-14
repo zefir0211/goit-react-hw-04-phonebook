@@ -23,9 +23,12 @@ const App = () => {
   }, [contacts]);
 
   const newContacts = newObj => {
-    if (contacts.some(x => x.name.toLowerCase === newObj.name.toLowerCase)) {
-      alert(`${newObj.name} is already is contacts`);
-      return false;
+  const lowercaseNames = contacts.map(contact => contact.name.toLowerCase());
+  const newName = newObj.name.toLowerCase();
+
+  if (lowercaseNames.includes(newName)) {
+    alert(`${newObj.name} уже есть в списке контактов`);
+    return false;
     }
     setContacts(prevState => [...prevState, newObj]);
     return true;
