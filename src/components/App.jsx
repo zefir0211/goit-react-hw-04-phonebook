@@ -59,8 +59,7 @@ const App = () => {
             <H2>Contacts</H2>
             <Filter onChange={onCahangeFilter} />
             <ContactList
-              fillter={fillter}
-              contacts={contacts}
+              contacts={fillter ? fillter : contacts}
               deleteContacts={deleteContacts}
             />
           </DivList>

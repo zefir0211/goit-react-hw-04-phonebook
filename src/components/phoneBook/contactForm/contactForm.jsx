@@ -11,7 +11,7 @@ const BASE_STATE = {
 const ContactForm = ({ newContact }) => {
 const [{ name, number }, setState] = useState(BASE_STATE);
 
-const onChange = event => {
+function onChange  (event)  {
     const { name, value } = event.target;
     setState(prevState => ({ ...prevState, [name]: value }))
 };
